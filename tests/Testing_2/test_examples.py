@@ -97,8 +97,22 @@ class TestDelateCreate:
     }
     def test_create_and_update(self):
         url = f"""{BASE_URL}{SINGLE_USER}"""
-        put_url = f"""{BASE_URL}{SINGLE_USER}/2"""
+        del_url = f"""{BASE_URL}{SINGLE_USER}/2"""
         response1 = requests.post(url, data=self.data)
         print(response1.json())
-        response2 = requests.delete(put_url)
-        print(response2.json())
+        response2 = requests.delete(del_url)
+        print(response2.text) # если тут будет json то будет ошибка тк возвращает пустую строчку
+        print(response2.status_code)
+
+class Test_RegisterSuccessful:
+    data = {
+        "email": "eve.holt@reqres.in",
+        "password": "pistol"
+    }
+
+    def test_register_successful(self):
+        url = f"""{BASE_URL}{REGISTER}"""
+        response = requests.post(url, data=self.data)
+        print(response.json())
+
+
